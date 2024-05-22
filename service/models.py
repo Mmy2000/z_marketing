@@ -15,6 +15,10 @@ class Services(models.Model):
             self.slug=slugify(self.name)
         super(Services,self).save(*args,**kwargs)
 
+    class Meta:
+        verbose_name = ("Services")
+        verbose_name_plural = ("Services")
+
     def __str__(self):
         return self.name
     

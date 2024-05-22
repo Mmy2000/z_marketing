@@ -7,6 +7,10 @@ class About(models.Model):
     our_mission = models.TextField(max_length=5000)
     image = models.ImageField( upload_to='about/')
 
+    class Meta:
+        verbose_name = ("About")
+        verbose_name_plural = ("About")
+
     def __str__(self):
         return str(self.id)
     

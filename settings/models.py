@@ -1,4 +1,5 @@
 from django.db import models
+from django.utils import timezone
 
 # Create your models here.
 class Settings(models.Model):
@@ -20,3 +21,15 @@ class Settings(models.Model):
 
     def __str__(self):
         return self.site_name
+    
+class NewsLitter(models.Model):
+    email = models.EmailField( max_length=254)
+    created_at = models.DateTimeField(default=timezone.now)
+    
+
+    class Meta:
+        verbose_name = ("NewsLitter")
+        verbose_name_plural = ("NewsLitter")
+
+    def __str__(self):
+        return self.email
