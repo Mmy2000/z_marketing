@@ -5,8 +5,10 @@ from django.utils import timezone
 class Settings(models.Model):
     site_name = models.CharField( max_length=50)
     logo = models.ImageField( upload_to='setting/')
-    phone = models.CharField( max_length=30)
-    email = models.EmailField( max_length=254)
+    phone1 = models.CharField( max_length=30)
+    phone2 = models.CharField( max_length=30 , blank=True , null=True)
+    email1 = models.EmailField( max_length=254)
+    email2 = models.EmailField( max_length=254 ,blank=True , null=True)
     description = models.TextField(max_length=1000)
     fb_link = models.URLField( max_length=200)
     linkedin_link = models.URLField( max_length=200)
@@ -33,3 +35,14 @@ class NewsLitter(models.Model):
 
     def __str__(self):
         return self.email
+    
+class Clients(models.Model):
+    image = models.ImageField( upload_to='setting/')
+
+    class Meta:
+        verbose_name = ("Clients")
+        verbose_name_plural = ("Clients")
+
+    def __str__(self):
+        return int(self.id)
+    

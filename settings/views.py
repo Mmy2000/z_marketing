@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from service.models import Services
 from about.models import About
-from .models import NewsLitter
+from .models import NewsLitter , Clients
 from django.http import JsonResponse
 
 # Create your views here.
@@ -9,9 +9,11 @@ from django.http import JsonResponse
 def home(request):
     services = Services.objects.all()[:4]
     about = About.objects.last()
+    vendors = Clients.objects.all()
     context = {
         'services':services,
-        'about' : about
+        'about' : about,
+        'vendors':vendors
     }
 
     return render(request , 'home.html' , context)
