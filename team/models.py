@@ -7,7 +7,7 @@ class Team(models.Model):
     fb_link = models.URLField( max_length=200)
     linkedin_link = models.URLField( max_length=200)
     instagram_link = models.URLField( max_length=200)
-    twitter_link = models.URLField( max_length=200)
+    twitter_link = models.URLField( max_length=200 , null=True , blank=True)
     image = models.ImageField( upload_to='team/')
 
     def __str__(self):

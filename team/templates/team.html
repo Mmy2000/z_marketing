@@ -29,13 +29,13 @@ Team
                         <div class="guide-item">
                             <div class="guide-img">
                                 <div class="guide-img-efects">
-                                    <img src="{{team.image.url}}" class="img-fluid w-100 rounded-top" alt="Image">
+                                    <img src="{{team.image.url}}" class="object-fit-contain w-100 rounded-top" height="400px" alt="Image">
                                 </div>
                                 <div class="guide-icon rounded-pill p-2">
-                                    <a class="btn btn-square btn-primary rounded-circle mx-1" href="{{team.fb_link}}"><i class="fab fa-facebook-f"></i></a>
-                                    <a class="btn btn-square btn-primary rounded-circle mx-1" href="{{team.twitter_link}}"><i class="fab fa-twitter"></i></a>
-                                    <a class="btn btn-square btn-primary rounded-circle mx-1" href="{{team.instagram_link}}"><i class="fab fa-instagram"></i></a>
-                                    <a class="btn btn-square btn-primary rounded-circle mx-1" href="{{team.linkedin_link}}"><i class="fab fa-linkedin-in"></i></a>
+                                    <a class="btn btn-square btn-primary rounded-circle mx-1" href=" {% if team.fb_link %} {{ team.fb_link}} {% else %} # {% endif %}"><i class="fab fa-facebook-f"></i></a>
+                                    <a class="btn btn-square btn-primary rounded-circle mx-1" href="{% if team.twitter_link %} {{ team.twitter_link}} {% else %} # {% endif %}"><i class="fab fa-twitter"></i></a>
+                                    <a class="btn btn-square btn-primary rounded-circle mx-1" href="{% if team.instagram_link %} {{ team.instagram_link}} {% else %} # {% endif %}"><i class="fab fa-instagram"></i></a>
+                                    <a class="btn btn-square btn-primary rounded-circle mx-1" href="{% if team.linkedin_link %} {{ team.linkedin_link}} {% else %} # {% endif %}"><i class="fab fa-linkedin-in"></i></a>
                                 </div>
                             </div>
                             <div class="guide-title text-center rounded-bottom p-4">
