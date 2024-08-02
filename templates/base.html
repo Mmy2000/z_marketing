@@ -5,7 +5,7 @@
 
     <head>
         <meta charset="utf-8">
-        <title>Z Marketing - {% block title %}{% endblock title %}</title>
+        <title>{{myfooter.site_name}} - {% block title %}{% endblock title %}</title>
         <meta content="width=device-width, initial-scale=1.0" name="viewport">
         <meta content="" name="keywords">
         <meta content="" name="description">
@@ -80,6 +80,7 @@
                         <a href="/" class="nav-item nav-link {% if request.path == '/' %}active{% endif %}">Home</a>
                         <a href="{% url 'about'%}" class="nav-item nav-link {% if request.path == '/about/' %}active{% endif %}">About</a>
                         <a href="{% url 'service_list' %}" class="nav-item nav-link {% if request.path == '/services/' %}active{% endif %}">Services</a>
+                        <a href="{% url 'team' %}" class="nav-item nav-link {% if request.path == '/team/' %}active{% endif %}">Our Team</a>
                         <a href="{% url 'contact'%}" class="nav-item nav-link {% if request.path == '/contact/' %}active{% endif %}">Contact</a>
                     </div>
                 </div>
