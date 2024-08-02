@@ -46,3 +46,15 @@ class Clients(models.Model):
     def __str__(self):
         return int(self.id)
     
+class Images(models.Model):
+    title = models.CharField(("title"), max_length=150 , help_text=('this title is display in slider in home page'))
+    settings = models.ForeignKey(Settings, related_name='home_image',verbose_name="home_image", on_delete=models.CASCADE)
+    description = models.TextField(max_length=1000)
+    image = models.ImageField(("image"), upload_to='homeImages/' , help_text='this image is display in slider in home page')
+
+    class Meta:
+        verbose_name = ("Home Images")
+        verbose_name_plural = ("Home Images")
+
+    def __str__(self):
+        return self.title
