@@ -2,6 +2,18 @@
 {% block title %}
 {{project}}
 {% endblock title %}
+<style>
+        .image-count-indicator {
+            position: absolute;
+            bottom: 10px;
+            right: 10px;
+            background: rgba(0, 0, 0, 0.5);
+            color: #fff;
+            padding: 5px 10px;
+            border-radius: 5px;
+            z-index: 10;
+        }
+    </style>
 {% block body %}
 
 <!-- Header Start -->
@@ -25,14 +37,16 @@
         </div>
         <div class="row">
             <div class="col-md-8 mx-auto">
-                <div id="projectCarousel" class="carousel slide" data-ride="carousel">
+                 <div id="projectCarousel" class="carousel slide" data-ride="carousel" data-interval="false">
                     <div class="carousel-inner">
                         <div class="carousel-item active">
                             <img src="{{ project.image.url }}" class="d-block w-100" alt="{{ project.name }}">
+                            <div class="image-count-indicator">Image 1 of {{ project.project_image.count|add:1 }}</div>
                         </div>
                         {% for image in project.project_image.all %}
                         <div class="carousel-item">
                             <img src="{{ image.image.url }}" class="d-block w-100" alt="{{ project.name }}">
+                            <div class="image-count-indicator">Image {{ forloop.counter0|add:2 }} of {{ project.project_image.count|add:1 }}</div>
                         </div>
                         {% endfor %}
                     </div>
