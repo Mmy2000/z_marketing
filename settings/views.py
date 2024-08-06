@@ -4,6 +4,7 @@ from about.models import About
 from .models import NewsLitter , Clients
 from django.http import JsonResponse
 from team.models import Team
+from projects.models import Projects
 
 # Create your views here.
 
@@ -11,10 +12,12 @@ def home(request):
     services = Services.objects.all()[:4]
     about = About.objects.last()
     teams = Team.objects.all()
+    projects = Projects.objects.prefetch_related('project_image').all()
     context = {
         'services':services,
         'about' : about,
         'teams' : teams,
+        'projects' : projects,
     }
 
     return render(request , 'home.html' , context)

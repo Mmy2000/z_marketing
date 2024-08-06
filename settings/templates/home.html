@@ -66,6 +66,49 @@ Home
     </div>
 </div>
 <!-- Services End -->
+ <!-- Gallery Start -->
+<div class="container gallery py-5 my-5">
+    <div class="mx-auto text-center mb-5" style="max-width: 900px;">
+        <h5 class="section-title px-3">Our Projects</h5>
+        <h1 class="mb-4">Our Projects</h1>
+        </p>
+    </div>
+    <div class="tab-class text-center">
+
+        <div class="tab-content">
+            <div id="GalleryTab-1" class="tab-pane fade show p-0 active">
+                <div class="row g-2">
+                    {% for project in projects %}
+                    <div class="col-sm-6 col-md-6 col-lg-4 col-xl-3">
+                        <div class="gallery-item h-100">
+                            <img src="{{ project.image.url }}" class="img-fluid w-100 h-100 rounded" alt="Image">
+                            <div class="gallery-content">
+                                <div class="gallery-info">
+                                    <h5 class="text-white text-uppercase mb-2">{{ project }}</h5>
+                                    <a href="{{project.get_absolute_url}}" class="btn-hover text-white">View All Details <i
+                                            class="fa fa-arrow-right ms-2"></i></a>
+                                </div>
+                            </div>
+                            <div class="gallery-plus-icon">
+                                <a href="{{ project.project_image.first.image.url }}"
+                                    data-lightbox="gallery-{{ project.id }}" class="my-auto">
+                                    <i class="fas fa-plus fa-2x text-white"></i>
+                                </a>
+                                {% for image in project.project_image.all %}
+                                <a href="{{ image.image.url }}" data-lightbox="gallery-{{ project.id }}"
+                                    class="d-none"></a>
+                                {% endfor %}
+                            </div>
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+<!-- Gallery End -->
  <!-- Travel Guide Start -->
         <div class="container-fluid guide py-5">
             <div class="container py-5">
