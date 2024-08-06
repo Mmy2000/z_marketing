@@ -43,6 +43,8 @@ INSTALLED_APPS = [
     'about',
     'contacts',
     'team',
+    'projects',
+    'django_summernote',
 ]
 
 MIDDLEWARE = [
