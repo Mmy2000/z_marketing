@@ -16,7 +16,7 @@ def contact(request):
             data.subject = form.cleaned_data['subject']
             data.message = form.cleaned_data['message']
             data.save()
-            subject = "Welcome to Z Marketing site"
+            subject = "Welcome to AI Control site"
             message = "Our team will contact you within 24hrs."
             email_from = settings.EMAIL_HOST_USER
             email = form.cleaned_data['email']
