@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render , get_object_or_404
 from .models import Projects , ProductImages
 # Create your views here.
 def projects(request):
@@ -9,7 +9,7 @@ def projects(request):
     return render(request , 'projects.html' , context)
 
 def project_details(request , slug):
-    project = Projects.objects.get(slug = slug)
+    project = get_object_or_404(Projects, slug=slug)
     context = {
         'project':project
     }
