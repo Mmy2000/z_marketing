@@ -58,41 +58,45 @@ Contact
                 <h3 class="mb-2">Send us a message</h3>
                 <p class="mb-4">The contact form is currently active.</p>
                 <form method="POST" action="{% url 'contact' %}">
-    {% csrf_token %}
-    <div class="row g-3">
-        <div class="col-md-6">
-            <div class="form-floating">
-                <input type="text" name="name" class="form-control border-0" id="name" placeholder="Your Name">
-                <label for="name">Your Name</label>
-            </div>
-        </div>
-        <div class="col-md-6">
-            <div class="form-floating">
-                <input type="email" name="email" class="form-control border-0" id="email" placeholder="Your Email">
-                <label for="email">Your Email</label>
-            </div>
-        </div>
-        <div class="col-12">
-            <div class="form-floating">
-                <input type="text" name="subject" class="form-control border-0" id="subject" placeholder="Subject">
-                <label for="subject">Subject</label>
-            </div>
-        </div>
-        <div class="col-12">
-            <div class="form-floating">
-                <textarea class="form-control border-0" name="message" placeholder="Leave a message here" id="message" style="height: 160px"></textarea>
-                <label for="message">Message</label>
-            </div>
-        </div>
-        <div class="col-12">
-            <button id="submitBtn" class="btn btn-primary w-100 py-3" type="submit">
-                <i role="status" aria-hidden="true" style="display: none;" id="spinner" class="fas fa-spinner fa-spin"></i>
-                Send Message
-            </button>
-        </div>
-    </div>
-</form>
-
+                    {% csrf_token %}
+                    <div class="row g-3">
+                        <div class="col-md-6">
+                            <div class="form-floating">
+                                <input type="text" name="name" class="form-control border-0" id="name"
+                                    placeholder="Your Name">
+                                <label for="name">Your Name</label>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-floating">
+                                <input type="email" name="email" class="form-control border-0" id="email"
+                                    placeholder="Your Email">
+                                <label for="email">Your Email</label>
+                            </div>
+                        </div>
+                        <div class="col-12">
+                            <div class="form-floating">
+                                <input type="text" name="subject" class="form-control border-0" id="subject"
+                                    placeholder="Subject">
+                                <label for="subject">Subject</label>
+                            </div>
+                        </div>
+                        <div class="col-12">
+                            <div class="form-floating">
+                                <textarea class="form-control border-0" name="message"
+                                    placeholder="Leave a message here" id="message" style="height: 160px"></textarea>
+                                <label for="message">Message</label>
+                            </div>
+                        </div>
+                        <div class="col-12">
+                            <button id="submitBtn" class="btn btn-primary w-100 py-3" type="submit">
+                                <span id="spinner" class="spinner-border spinner-border-sm" role="status"
+                                    aria-hidden="true" style="display: none;"></span>
+                                Send Message
+                            </button>
+                        </div>
+                    </div>
+                </form>
 
             </div>
 
@@ -102,17 +106,24 @@ Contact
 <!-- Contact End -->
 
 <script>
-document.addEventListener("DOMContentLoaded", function() {
-    const form = document.querySelector("form");
-    const submitBtn = document.getElementById("submitBtn");
-    const spinner = document.getElementById("spinner");
+    document.addEventListener("DOMContentLoaded", function () {
+        const form = document.querySelector("form");
+        const submitBtn = document.getElementById("submitBtn");
+        const spinner = document.getElementById("spinner");
 
-    form.addEventListener("submit", function(event) {
-        // Show the spinner and disable the submit button
-        submitBtn.disabled = true;
-        spinner.style.display = "inline-block";
+        form.addEventListener("submit", function (event) {
+            // Show the spinner and disable the submit button
+            submitBtn.disabled = true;
+            spinner.style.display = "inline-block";
+        });
+
+        // This part handles form response and re-enables the button if needed
+        form.addEventListener("ajax:complete", function (event) {
+            // Hide the spinner and enable the submit button
+            submitBtn.disabled = false;
+            spinner.style.display = "none";
+        });
     });
-});
 </script>
 
 {% endblock body %}
