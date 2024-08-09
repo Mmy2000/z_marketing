@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Projects , ProductImages
+from .models import Projects , ProductImages , Booking
 import admin_thumbnails
 from django_summernote.admin import SummernoteModelAdmin
 
@@ -17,4 +17,5 @@ class ModelAdmin(SummernoteModelAdmin):  # instead of ModelAdmin
 
 admin.site.register(Projects,ModelAdmin)
 admin.site.register(ProductImages)
+admin.site.register(Booking)
 

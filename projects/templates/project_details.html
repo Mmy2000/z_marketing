@@ -1,19 +1,20 @@
 {% extends "base.html" %}
+{% load django_bootstrap5 %}
 {% block title %}
 {{project}}
 {% endblock title %}
 <style>
-        .image-count-indicator {
-            position: absolute;
-            bottom: 10px;
-            right: 10px;
-            background: rgba(0, 0, 0, 0.5);
-            color: #fff;
-            padding: 5px 10px;
-            border-radius: 5px;
-            z-index: 10;
-        }
-    </style>
+    .image-count-indicator {
+        position: absolute;
+        bottom: 10px;
+        right: 10px;
+        background: rgba(0, 0, 0, 0.5);
+        color: #fff;
+        padding: 5px 10px;
+        border-radius: 5px;
+        z-index: 10;
+    }
+</style>
 {% block body %}
 
 <!-- Header Start -->
@@ -30,51 +31,131 @@
 <!-- Header End -->
 
 <div class="container my-5">
-        <div class="row">
-            <div class="col-12 text-center mb-4">
-                <h1>{{ project.name }}</h1>
+    <div class="mt-2" id="success">{% include "includes/alerts.html" %}</div>
+    <div class="row">
+        <div class="col-12 text-center mb-4">
+            <h1>{{ project.name }}</h1>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-8 mx-auto">
+            <div id="projectCarousel" class="carousel slide" data-ride="carousel" data-interval="false">
+                <div class="carousel-inner">
+                    <div class="carousel-item active">
+                        <img src="{{ project.image.url }}" class="d-block w-100" alt="{{ project.name }}">
+                        <div class="image-count-indicator">Image 1 of {{ project.project_image.count|add:1 }}</div>
+                    </div>
+                    {% for image in project.project_image.all %}
+                    <div class="carousel-item">
+                        <img src="{{ image.image.url }}" class="d-block w-100" alt="{{ project.name }}">
+                        <div class="image-count-indicator">Image {{ forloop.counter0|add:2 }} of
+                            {{ project.project_image.count|add:1 }}</div>
+                    </div>
+                    {% endfor %}
+                </div>
+                <a class="carousel-control-prev" href="#projectCarousel" role="button" data-slide="prev">
+                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                    <span class="sr-only">Previous</span>
+                </a>
+                <a class="carousel-control-next" href="#projectCarousel" role="button" data-slide="next">
+                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                    <span class="sr-only">Next</span>
+                </a>
             </div>
         </div>
-        <div class="row">
-            <div class="col-md-8 mx-auto">
-                 <div id="projectCarousel" class="carousel slide" data-ride="carousel" data-interval="false">
-                    <div class="carousel-inner">
-                        <div class="carousel-item active">
-                            <img src="{{ project.image.url }}" class="d-block w-100" alt="{{ project.name }}">
-                            <div class="image-count-indicator">Image 1 of {{ project.project_image.count|add:1 }}</div>
-                        </div>
-                        {% for image in project.project_image.all %}
-                        <div class="carousel-item">
-                            <img src="{{ image.image.url }}" class="d-block w-100" alt="{{ project.name }}">
-                            <div class="image-count-indicator">Image {{ forloop.counter0|add:2 }} of {{ project.project_image.count|add:1 }}</div>
-                        </div>
-                        {% endfor %}
-                    </div>
-                    <a class="carousel-control-prev" href="#projectCarousel" role="button" data-slide="prev">
-                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                        <span class="sr-only">Previous</span>
-                    </a>
-                    <a class="carousel-control-next" href="#projectCarousel" role="button" data-slide="next">
-                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                        <span class="sr-only">Next</span>
-                    </a>
-                </div>
-            </div>
-            <div class="col-md-10 mx-auto mt-4">
-                <div class="card">
-                    <div class="card-body">
-                        <h2 class="card-title text-center">Project Details</h2>
-                        <p class="card-text"><strong>Created at:</strong> {{ project.created_at|date:"F j, Y, g:i a" }}</p>
-                        <p class="card-text">{{ project.description | safe }}</p>
+        <div class="col-md-10 mx-auto mt-4">
+            <div class="card">
+                <div class="card-body">
+                    <h2 class="card-title text-center">Project Details</h2>
+                    <p class="card-text"><strong>Created at:</strong> {{ project.created_at|date:"F j, Y, g:i a" }}</p>
+                    <p class="card-text">{{ project.description | safe }}</p>
+                    <div class="border m-5 px-5 py-3 rounded">
+                        <h2 class="text-center">Book this Product</h2>
+
+                        <form id="bookingForm" method="post" novalidate>
+                            {% csrf_token %}
+                            <div class="mb-3">
+                                {{ form.name.label_tag }}
+                                {{ form.name }}
+                                <div class="invalid-feedback" id="name-error"></div>
+                            </div>
+                            <div class="mb-3">
+                                {{ form.email.label_tag }}
+                                {{ form.email }}
+                                <div class="invalid-feedback" id="email-error"></div>
+                            </div>
+                            <div class="mb-3">
+                                {{ form.phone.label_tag }}
+                                {{ form.phone }}
+                                <div class="invalid-feedback" id="phone-error"></div>
+                            </div>
+                            <div class="mb-3">
+                                {{ form.quantity.label_tag }}
+                                {{ form.quantity }}
+                                <div class="invalid-feedback" id="quantity-error"></div>
+                            </div>
+                            <button type="submit" class="btn btn-primary">Book Now</button>
+                        </form>
                     </div>
                 </div>
             </div>
         </div>
     </div>
+</div>
 
-    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+    const form = document.getElementById('bookingForm');
+    const nameField = form.elements['name'];
+    const emailField = form.elements['email'];
+    const phoneField = form.elements['phone'];
+    const quantityField = form.elements['quantity'];
+
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    const phoneRegex = /^\d{10,15}$/;
+
+    nameField.addEventListener('input', function () {
+        validateField(nameField, nameField.value.trim() !== '', 'Name is required.', 'name-error');
+    });
+
+    emailField.addEventListener('input', function () {
+        validateField(emailField, emailRegex.test(emailField.value), 'Please enter a valid email address.', 'email-error');
+    });
+
+    phoneField.addEventListener('input', function () {
+        validateField(phoneField, phoneRegex.test(phoneField.value), 'Please enter a valid phone number.', 'phone-error');
+    });
+
+    quantityField.addEventListener('input', function () {
+        validateField(quantityField, quantityField.value > 0, 'Quantity must be greater than 0.', 'quantity-error');
+    });
+
+    form.addEventListener('submit', function (event) {
+        if (!form.checkValidity()) {
+            event.preventDefault(); // Prevent form submission if validation fails
+        }
+    });
+
+    function validateField(field, isValid, errorMessage, errorFieldId) {
+        const errorField = document.getElementById(errorFieldId);
+        if (isValid) {
+            field.classList.remove('is-invalid');
+            field.classList.add('is-valid');
+            field.setCustomValidity('');
+            errorField.textContent = ''; // Clear the error message
+        } else {
+            field.classList.remove('is-valid');
+            field.classList.add('is-invalid');
+            field.setCustomValidity(errorMessage);
+            errorField.textContent = errorMessage; // Display the error message
+        }
+    }
+});
+</script>
+
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 
 
 {% endblock %}

@@ -45,6 +45,7 @@ INSTALLED_APPS = [
     'team',
     'projects',
     'django_summernote',
+    'django_bootstrap5',
 ]
 
 MIDDLEWARE = [

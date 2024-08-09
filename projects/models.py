@@ -37,3 +37,20 @@ class ProductImages(models.Model):
 
     def __str__(self):
         return str(self.project)
+    
+
+
+class Booking(models.Model):
+    project = models.ForeignKey(Projects, on_delete=models.CASCADE)
+    name = models.CharField(max_length=100)
+    email = models.EmailField()
+    phone = models.CharField(max_length=15)
+    quantity = models.PositiveIntegerField(default=1)  # Add this line
+    booking_date = models.DateTimeField(default=timezone.now)
+    
+    class Meta:
+        verbose_name = "Booking"
+        verbose_name_plural = "Bookings"
+
+    def __str__(self):
+        return f"Booking by {self.name} for {self.project.name} - Quantity: {self.quantity}"
