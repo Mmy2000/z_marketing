@@ -34,8 +34,15 @@ About
                         <p class="mb-4">{{about.what_we_do}}</p>
                         <h5>Our Mission</h5>
                         <p class="mb-4">{{about.our_mission}}</p>
+                        <div class="row gy-2 gx-4 mb-4">
+                            <h5>Our Support</h5>
+                            {% for support in supports %}
+                            <div class="col-sm-6">
+                                <p class="mb-0"><i class="fa fa-arrow-right text-primary me-2"></i>{{support}}</p>
+                            </div>
+                            {% endfor %}
+                        </div>
                         
-                        <a class="btn btn-primary rounded-pill py-3 px-5 mt-2" href="">Read More</a>
                     </div>
                 </div>
             </div>
