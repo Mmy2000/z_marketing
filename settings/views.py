@@ -1,6 +1,6 @@
 from django.shortcuts import render
 from service.models import Services
-from about.models import About
+from about.models import About , Support
 from .models import NewsLitter , Clients
 from django.http import JsonResponse
 from team.models import Team
@@ -13,11 +13,13 @@ def home(request):
     about = About.objects.last()
     teams = Team.objects.all()
     projects = Projects.objects.prefetch_related('project_image').all()
+    supports = Support.objects.all()
     context = {
         'services':services,
         'about' : about,
         'teams' : teams,
         'projects' : projects,
+        'supports' : supports,
     }
 
     return render(request , 'home.html' , context)
