@@ -74,12 +74,12 @@
 
                         <form id="bookingForm" method="post" novalidate>
                             {% csrf_token %}
-                            <div class="mb-3">
+                            <div class="mb-3" name="name">
                                 {{ form.name.label_tag }}
                                 {{ form.name }}
                                 <div class="invalid-feedback" id="name-error"></div>
                             </div>
-                            <div class="mb-3">
+                            <div class="mb-3" name="email">
                                 {{ form.email.label_tag }}
                                 {{ form.email }}
                                 <div class="invalid-feedback" id="email-error"></div>
