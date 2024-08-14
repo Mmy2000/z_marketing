@@ -30,3 +30,5 @@ def news_letters_subscribe(request):
     return JsonResponse({'done':'done'})
 
 
+def custom_404_view(request, exception=None):
+    return render(request, '404.html', {}, status=404)
